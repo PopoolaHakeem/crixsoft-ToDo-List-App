@@ -1,0 +1,12 @@
+ body {
+     background: #edf8fc;
+ }
+
+
+
+ .bg-custom {
+     background:
+         radial-gradient(circle at top left, #b9ecff, transparent 40%),
+         radial-gradient(circle at bottom right, #dff5ff, transparent 40%),
+         linear-gradient(180deg, #9fe5ff, #dff7ff);
+ }
