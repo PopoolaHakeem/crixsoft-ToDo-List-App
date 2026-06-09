@@ -8,6 +8,7 @@ const completedTasks = document.getElementById("completedTasks");
 
 let editingId = null;
 
+// Load tasks from localStorage or initialize an empty array
 let tasks =
 JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -26,6 +27,7 @@ function updateStats() {
     tasks.filter(task => task.completed).length;
 }
 
+// Render tasks based on the search query
 function renderTasks(search = "") {
 
     taskList.innerHTML = "";
@@ -49,12 +51,14 @@ function renderTasks(search = "") {
 
     filteredTasks.forEach(task => {
 
+        // Create task element
         const div =
         document.createElement("div");
 
         div.className =
         "bg-white p-4 rounded-xl shadow-sm flex items-center justify-between";
 
+        // Set task content
         div.innerHTML = `
             <div class="flex items-center gap-3">
 
@@ -76,6 +80,7 @@ function renderTasks(search = "") {
 
             </div>
 
+            
             <div class="flex gap-4">
 
                 <button
@@ -104,12 +109,16 @@ function renderTasks(search = "") {
     updateStats();
 }
 
+// Add or update a task
 function addTask() {
 
     const title =
     taskInput.value.trim();
 
-    if(title === "") return;
+    if(title === "") {
+        alert("Please enter a task title");
+        return;
+    }
 
     if(editingId){
 
@@ -144,6 +153,7 @@ function addTask() {
     taskInput.value = "";
 }
 
+// Delete a task by id
 function deleteTask(id){
 
     tasks =
@@ -158,6 +168,7 @@ function deleteTask(id){
     );
 }
 
+// Toggle task completion status by id
 function toggleTask(id){
 
     tasks = tasks.map(task => {
@@ -177,6 +188,7 @@ function toggleTask(id){
     );
 }
 
+// Edit a task by id
 function editTask(id){
 
     const task =
@@ -195,11 +207,13 @@ function editTask(id){
     `<i class="fa-solid fa-check"></i>`;
 }
 
+// Event listeners
 addBtn.addEventListener(
     "click",
     addTask
 );
 
+// Allow adding task with Enter key
 taskInput.addEventListener(
     "keypress",
     (e) => {
@@ -210,6 +224,7 @@ taskInput.addEventListener(
     }
 );
 
+// Search tasks on input
 searchInput.addEventListener(
     "input",
     () => {
